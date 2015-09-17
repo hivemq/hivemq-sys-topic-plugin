@@ -16,9 +16,9 @@
 
 package com.hivemq.plugins.plugin;
 
+import com.hivemq.plugins.callbacks.BrokerStart;
 import com.hivemq.spi.PluginEntryPoint;
 import com.hivemq.spi.callback.registry.CallbackRegistry;
-import com.hivemq.plugins.callbacks.SysTopicReporting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,29 +26,26 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 /**
- * This is the main class of the plugin, which is instanciated during the HiveMQ start up process.
+ * @author Lukas Brandl
  */
 public class SysTopicMetricsMainClass extends PluginEntryPoint {
 
     private static final Logger log = LoggerFactory.getLogger(SysTopicMetricsMainClass.class);
 
-    private final SysTopicReporting sysTopicReporting;
+    private final BrokerStart brokerStart;
 
     @Inject
-    public SysTopicMetricsMainClass(final SysTopicReporting sysTopicReporting) {
-        this.sysTopicReporting = sysTopicReporting;
+    public SysTopicMetricsMainClass(final BrokerStart brokerStart) {
+        this.brokerStart = brokerStart;
     }
 
-    /**
-     * This method is executed after the instanciation of the whole class. It is used to initialize
-     * the implemented callbacks and make them known to the HiveMQ core.
-     */
     @PostConstruct
     public void postConstruct() {
 
         CallbackRegistry callbackRegistry = getCallbackRegistry();
 
-        callbackRegistry.addCallback(sysTopicReporting);
+        log.debug("Registered Broker Start Callback for the Sys Topic Plugin .");
+        callbackRegistry.addCallback(brokerStart);
     }
 
 }
