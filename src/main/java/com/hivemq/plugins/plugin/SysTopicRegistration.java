@@ -36,6 +36,10 @@ public class SysTopicRegistration {
     private final ClientsDisconnectedTotal clientsDisconnectedTotal;
     private final ClientsConnectedMaximum clientsConnectedMaximum;
     private final ClientsTotal clientsTotal;
+    private final MessagesDroppedTotal messagesDroppedTotal;
+    private final MessagesReceivedTotal messagesReceivedTotal;
+    private final MessagesSentTotal messagesSentTotal;
+    private final MessagesStoredTotal messagesStoredTotal;
 
     @Inject
     public SysTopicRegistration(final SYSTopicService sysTopicService,
@@ -44,7 +48,11 @@ public class SysTopicRegistration {
                                 final ClientsConnectedCurrent clientsConnectedCurrent,
                                 final ClientsDisconnectedTotal clientsDisconnectedTotal,
                                 final ClientsConnectedMaximum clientsConnectedMaximum,
-                                final ClientsTotal clientsTotal) {
+                                final ClientsTotal clientsTotal,
+                                final MessagesDroppedTotal messagesDroppedTotal,
+                                final MessagesReceivedTotal messagesReceivedTotal,
+                                final MessagesSentTotal messagesSentTotal,
+                                final MessagesStoredTotal messagesStoredTotal) {
         this.sysTopicService = sysTopicService;
 
         this.bytesReceivedTotal = bytesReceivedTotal;
@@ -53,6 +61,10 @@ public class SysTopicRegistration {
         this.clientsDisconnectedTotal = clientsDisconnectedTotal;
         this.clientsConnectedMaximum = clientsConnectedMaximum;
         this.clientsTotal = clientsTotal;
+        this.messagesDroppedTotal = messagesDroppedTotal;
+        this.messagesReceivedTotal = messagesReceivedTotal;
+        this.messagesSentTotal = messagesSentTotal;
+        this.messagesStoredTotal = messagesStoredTotal;
     }
 
     public void registerSysTopics() {
@@ -74,6 +86,17 @@ public class SysTopicRegistration {
         log.debug("Added SYS topic entry for {}", clientsTotal.topic());
         sysTopicService.addEntry(clientsTotal);
 
+        log.debug("Added SYS topic entry for {}", messagesDroppedTotal.topic());
+        sysTopicService.addEntry(messagesDroppedTotal);
+
+        log.debug("Added SYS topic entry for {}", messagesReceivedTotal.topic());
+        sysTopicService.addEntry(messagesReceivedTotal);
+
+        log.debug("Added SYS topic entry for {}", messagesSentTotal.topic());
+        sysTopicService.addEntry(messagesSentTotal);
+
+        log.debug("Added SYS topic entry for {}", messagesStoredTotal.topic());
+        sysTopicService.addEntry(messagesStoredTotal);
 
     }
 
