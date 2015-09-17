@@ -48,6 +48,11 @@ public class SysTopicRegistration {
     private final UpTimeTotal upTimeTotal;
     private final VersionCurrent versionCurrent;
     private final ConnectionsRate connectionsRate;
+    private final MessagesDroppedRate messagesDroppedRate;
+    private final MessagesReceivedRate messagesReceivedRate;
+    private final MessagesSentRate messagesSentRate;
+    private final PublishSentRate publishSentRate;
+    private final PublishReceivedRate publishReceivedRate;
 
     @Inject
     public SysTopicRegistration(final SYSTopicService sysTopicService,
@@ -67,7 +72,12 @@ public class SysTopicRegistration {
                                 final TimeCurrent timeCurrent,
                                 final UpTimeTotal upTimeTotal,
                                 final VersionCurrent versionCurrent,
-                                final ConnectionsRate connectionsRate) {
+                                final ConnectionsRate connectionsRate,
+                                final MessagesDroppedRate messagesDroppedRate,
+                                final MessagesReceivedRate messagesReceivedRate,
+                                final MessagesSentRate messagesSentRate,
+                                final PublishSentRate publishSentRate,
+                                final PublishReceivedRate publishReceivedRate) {
 
         this.sysTopicService = sysTopicService;
 
@@ -88,6 +98,11 @@ public class SysTopicRegistration {
         this.upTimeTotal = upTimeTotal;
         this.versionCurrent = versionCurrent;
         this.connectionsRate = connectionsRate;
+        this.messagesDroppedRate = messagesDroppedRate;
+        this.messagesReceivedRate = messagesReceivedRate;
+        this.messagesSentRate = messagesSentRate;
+        this.publishSentRate = publishSentRate;
+        this.publishReceivedRate = publishReceivedRate;
     }
 
     public void registerSysTopics() {
@@ -110,6 +125,11 @@ public class SysTopicRegistration {
         registerEntry(versionCurrent);
 
         registerRateEntry(connectionsRate);
+        registerRateEntry(messagesDroppedRate);
+        registerRateEntry(messagesReceivedRate);
+        registerRateEntry(messagesSentRate);
+        registerRateEntry(publishReceivedRate);
+        registerRateEntry(publishSentRate);
 
 
     }
