@@ -18,6 +18,7 @@ package com.hivemq.plugins.plugin;
 import com.google.inject.Inject;
 import com.hivemq.plugins.entry.*;
 import com.hivemq.spi.services.SYSTopicService;
+import com.hivemq.spi.topic.sys.SYSTopicEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +47,7 @@ public class SysTopicRegistration {
     private final TimeCurrent timeCurrent;
     private final UpTimeTotal upTimeTotal;
     private final VersionCurrent versionCurrent;
+    private final ConnectionsRate connectionsRate;
 
     @Inject
     public SysTopicRegistration(final SYSTopicService sysTopicService,
@@ -64,7 +66,8 @@ public class SysTopicRegistration {
                                 final SubscriptionsCurrent subscriptionsCurrent,
                                 final TimeCurrent timeCurrent,
                                 final UpTimeTotal upTimeTotal,
-                                final VersionCurrent versionCurrent) {
+                                final VersionCurrent versionCurrent,
+                                final ConnectionsRate connectionsRate) {
 
         this.sysTopicService = sysTopicService;
 
@@ -84,57 +87,48 @@ public class SysTopicRegistration {
         this.timeCurrent = timeCurrent;
         this.upTimeTotal = upTimeTotal;
         this.versionCurrent = versionCurrent;
+        this.connectionsRate = connectionsRate;
     }
 
     public void registerSysTopics() {
-        log.debug("Added SYS topic entry for {}", bytesReceivedTotal.topic());
-        sysTopicService.addEntry(bytesReceivedTotal);
 
-        log.debug("Added SYS topic entry for {}", bytesSentTotal.topic());
-        sysTopicService.addEntry(bytesSentTotal);
+        registerEntry(bytesReceivedTotal);
+        registerEntry(bytesSentTotal);
+        registerEntry(clientsConnectedCurrent);
+        registerEntry(clientsDisconnectedTotal);
+        registerEntry(clientsConnectedMaximum);
+        registerEntry(clientsTotal);
+        registerEntry(messagesDroppedTotal);
+        registerEntry(messagesReceivedTotal);
+        registerEntry(messagesSentTotal);
+        registerEntry(publishReceivedTotal);
+        registerEntry(publishSentTotal);
+        registerEntry(retainedCurrent);
+        registerEntry(subscriptionsCurrent);
+        registerEntry(timeCurrent);
+        registerEntry(upTimeTotal);
+        registerEntry(versionCurrent);
 
-        log.debug("Added SYS topic entry for {}", clientsConnectedCurrent.topic());
-        sysTopicService.addEntry(clientsConnectedCurrent);
+        registerRateEntry(connectionsRate);
 
-        log.debug("Added SYS topic entry for {}", clientsDisconnectedTotal.topic());
-        sysTopicService.addEntry(clientsDisconnectedTotal);
 
-        log.debug("Added SYS topic entry for {}", clientsConnectedMaximum.topic());
-        sysTopicService.addEntry(clientsConnectedMaximum);
+    }
 
-        log.debug("Added SYS topic entry for {}", clientsTotal.topic());
-        sysTopicService.addEntry(clientsTotal);
+    private void registerEntry(final SYSTopicEntry sysTopicEntry) {
+        log.debug("Added SYS topic entry for {}", sysTopicEntry.topic());
+        sysTopicService.addEntry(sysTopicEntry);
+    }
 
-        log.debug("Added SYS topic entry for {}", messagesDroppedTotal.topic());
-        sysTopicService.addEntry(messagesDroppedTotal);
+    private void registerRateEntry(final RateEntry rateEntry) {
 
-        log.debug("Added SYS topic entry for {}", messagesReceivedTotal.topic());
-        sysTopicService.addEntry(messagesReceivedTotal);
+        SYSTopicEntry rate1Min = rateEntry.oneMinute();
+        registerEntry(rate1Min);
 
-        log.debug("Added SYS topic entry for {}", messagesSentTotal.topic());
-        sysTopicService.addEntry(messagesSentTotal);
+        SYSTopicEntry rate5Min = rateEntry.fiveMinutes();
+        registerEntry(rate5Min);
 
-        log.debug("Added SYS topic entry for {}", publishReceivedTotal.topic());
-        sysTopicService.addEntry(publishReceivedTotal);
-
-        log.debug("Added SYS topic entry for {}", publishSentTotal.topic());
-        sysTopicService.addEntry(publishSentTotal);
-
-        log.debug("Added SYS topic entry for {}", retainedCurrent.topic());
-        sysTopicService.addEntry(retainedCurrent);
-
-        log.debug("Added SYS topic entry for {}", subscriptionsCurrent.topic());
-        sysTopicService.addEntry(subscriptionsCurrent);
-
-        log.debug("Added SYS topic entry for {}", timeCurrent.topic());
-        sysTopicService.addEntry(timeCurrent);
-
-        log.debug("Added SYS topic entry for {}", upTimeTotal.topic());
-        sysTopicService.addEntry(upTimeTotal);
-
-        log.debug("Added SYS topic entry for {}", versionCurrent.topic());
-        sysTopicService.addEntry(versionCurrent);
-
+        SYSTopicEntry rate15Min = rateEntry.fifteenMinutes();
+        registerEntry(rate15Min);
     }
 
 }

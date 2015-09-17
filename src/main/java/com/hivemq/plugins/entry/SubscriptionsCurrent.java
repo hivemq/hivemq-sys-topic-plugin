@@ -30,7 +30,7 @@ public class SubscriptionsCurrent implements SYSTopicEntry {
 
     private final MetricService metricService;
 
-    private final String topic = "";
+    private final String topic = "$SYS/broker/subscriptions/count";
 
     @Inject
     public SubscriptionsCurrent(final MetricService metricService) {
@@ -54,7 +54,7 @@ public class SubscriptionsCurrent implements SYSTopicEntry {
 
     @Override
     public String description() {
-        return "";
+        return "The total number of subscriptions active on the broker.";
     }
 
     private class SysTopicSupplier implements Supplier<byte[]> {
