@@ -17,6 +17,7 @@
 package com.hivemq.plugins.plugin;
 
 import com.hivemq.plugins.callbacks.BrokerStart;
+import com.hivemq.plugins.callbacks.ClientSubscribed;
 import com.hivemq.spi.PluginEntryPoint;
 import com.hivemq.spi.callback.registry.CallbackRegistry;
 import org.slf4j.Logger;
@@ -33,19 +34,22 @@ public class SysTopicMetricsMainClass extends PluginEntryPoint {
     private static final Logger log = LoggerFactory.getLogger(SysTopicMetricsMainClass.class);
 
     private final BrokerStart brokerStart;
+    private final ClientSubscribed clientSubscribed;
 
     @Inject
-    public SysTopicMetricsMainClass(final BrokerStart brokerStart) {
+    public SysTopicMetricsMainClass(final BrokerStart brokerStart,
+                                    final ClientSubscribed clientSubscribed) {
         this.brokerStart = brokerStart;
+        this.clientSubscribed = clientSubscribed;
     }
 
     @PostConstruct
     public void postConstruct() {
-
         CallbackRegistry callbackRegistry = getCallbackRegistry();
 
         log.debug("Registered Broker Start Callback for the Sys Topic Plugin .");
         callbackRegistry.addCallback(brokerStart);
+        callbackRegistry.addCallback(clientSubscribed);
     }
 
 }

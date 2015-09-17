@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hivemq.plugins.entry;
 
 import com.codahale.metrics.Gauge;
@@ -27,14 +26,13 @@ import com.hivemq.spi.topic.sys.Type;
 /**
  * @author Lukas Brandl
  */
-public class BytesReceived implements SYSTopicEntry {
-
+public class ClientsDisconnectedTotal implements SYSTopicEntry {
     private final MetricService metricService;
 
-    private final String topic = "$SYS/broker/load/bytes/received";
+    private final String topic = "$SYS/broker/clients/disconnected";
 
     @Inject
-    public BytesReceived(final MetricService metricService) {
+    public ClientsDisconnectedTotal(final MetricService metricService) {
         this.metricService = metricService;
     }
 
@@ -55,15 +53,20 @@ public class BytesReceived implements SYSTopicEntry {
 
     @Override
     public String description() {
-        return "The total number of bytes received since the broker started.";
+        return "The total number of persistent clients (with clean session disabled) that are registered at the broker but are currently disconnected.";
     }
 
     private class SysTopicSupplier implements Supplier<byte[]> {
 
         @Override
         public byte[] get() {
-            final Gauge<Long> gauge = metricService.getHiveMQMetric(HiveMQMetrics.BYTES_READ_TOTAL);
-            return Long.toString(gauge.getValue()).getBytes();
+            final Gauge<Integer> clientSessionsGauge = metricService.getHiveMQMetric(HiveMQMetrics.CLIENT_SESSIONS_CURRENT);
+            final long clientSessionsCurrent = clientSessionsGauge.getValue();
+            final Gauge<Integer> clientsConnectedGauge = metricService.getHiveMQMetric(HiveMQMetrics.CONNECTIONS_OVERALL_CURRENT);
+            final long connectedClients = clientsConnectedGauge.getValue();
+
+            final long disconnectedClients = clientSessionsCurrent - connectedClients;
+            return Long.toString(disconnectedClients).getBytes();
         }
     }
 }
