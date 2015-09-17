@@ -39,7 +39,13 @@ public class SysTopicRegistration {
     private final MessagesDroppedTotal messagesDroppedTotal;
     private final MessagesReceivedTotal messagesReceivedTotal;
     private final MessagesSentTotal messagesSentTotal;
-    private final MessagesStoredTotal messagesStoredTotal;
+    private final PublishReceivedTotal publishReceivedTotal;
+    private final PublishSentTotal publishSentTotal;
+    private final RetainedCurrent retainedCurrent;
+    private final SubscriptionsCurrent subscriptionsCurrent;
+    private final TimeCurrent timeCurrent;
+    private final UpTimeTotal upTimeTotal;
+    private final VersionCurrent versionCurrent;
 
     @Inject
     public SysTopicRegistration(final SYSTopicService sysTopicService,
@@ -52,7 +58,14 @@ public class SysTopicRegistration {
                                 final MessagesDroppedTotal messagesDroppedTotal,
                                 final MessagesReceivedTotal messagesReceivedTotal,
                                 final MessagesSentTotal messagesSentTotal,
-                                final MessagesStoredTotal messagesStoredTotal) {
+                                final PublishReceivedTotal publishReceivedTotal,
+                                final PublishSentTotal publishSentTotal,
+                                final RetainedCurrent retainedCurrent,
+                                final SubscriptionsCurrent subscriptionsCurrent,
+                                final TimeCurrent timeCurrent,
+                                final UpTimeTotal upTimeTotal,
+                                final VersionCurrent versionCurrent) {
+
         this.sysTopicService = sysTopicService;
 
         this.bytesReceivedTotal = bytesReceivedTotal;
@@ -64,7 +77,13 @@ public class SysTopicRegistration {
         this.messagesDroppedTotal = messagesDroppedTotal;
         this.messagesReceivedTotal = messagesReceivedTotal;
         this.messagesSentTotal = messagesSentTotal;
-        this.messagesStoredTotal = messagesStoredTotal;
+        this.publishReceivedTotal = publishReceivedTotal;
+        this.publishSentTotal = publishSentTotal;
+        this.retainedCurrent = retainedCurrent;
+        this.subscriptionsCurrent = subscriptionsCurrent;
+        this.timeCurrent = timeCurrent;
+        this.upTimeTotal = upTimeTotal;
+        this.versionCurrent = versionCurrent;
     }
 
     public void registerSysTopics() {
@@ -95,8 +114,26 @@ public class SysTopicRegistration {
         log.debug("Added SYS topic entry for {}", messagesSentTotal.topic());
         sysTopicService.addEntry(messagesSentTotal);
 
-        log.debug("Added SYS topic entry for {}", messagesStoredTotal.topic());
-        sysTopicService.addEntry(messagesStoredTotal);
+        log.debug("Added SYS topic entry for {}", publishReceivedTotal.topic());
+        sysTopicService.addEntry(publishReceivedTotal);
+
+        log.debug("Added SYS topic entry for {}", publishSentTotal.topic());
+        sysTopicService.addEntry(publishSentTotal);
+
+        log.debug("Added SYS topic entry for {}", retainedCurrent.topic());
+        sysTopicService.addEntry(retainedCurrent);
+
+        log.debug("Added SYS topic entry for {}", subscriptionsCurrent.topic());
+        sysTopicService.addEntry(subscriptionsCurrent);
+
+        log.debug("Added SYS topic entry for {}", timeCurrent.topic());
+        sysTopicService.addEntry(timeCurrent);
+
+        log.debug("Added SYS topic entry for {}", upTimeTotal.topic());
+        sysTopicService.addEntry(upTimeTotal);
+
+        log.debug("Added SYS topic entry for {}", versionCurrent.topic());
+        sysTopicService.addEntry(versionCurrent);
 
     }
 

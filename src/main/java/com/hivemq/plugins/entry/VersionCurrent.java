@@ -15,26 +15,25 @@
  */
 package com.hivemq.plugins.entry;
 
-import com.codahale.metrics.Gauge;
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
-import com.hivemq.spi.metrics.HiveMQMetrics;
-import com.hivemq.spi.services.MetricService;
+import com.hivemq.spi.config.SystemInformation;
 import com.hivemq.spi.topic.sys.SYSTopicEntry;
 import com.hivemq.spi.topic.sys.Type;
 
 /**
  * @author Lukas Brandl
  */
-public class MessagesStoredTotal implements SYSTopicEntry {
+public class VersionCurrent implements SYSTopicEntry {
 
-    private final MetricService metricService;
+    private final SystemInformation systemInformation;
 
-    private final String topic = "$SYS/broker/messages/stored";
+    private final String topic = "$SYS/broker/version";
 
     @Inject
-    public MessagesStoredTotal(final MetricService metricService) {
-        this.metricService = metricService;
+    public VersionCurrent(final SystemInformation systemInformation) {
+        this.systemInformation = systemInformation;
+        systemInformation.getHiveMQVersion();
     }
 
     @Override
@@ -54,16 +53,14 @@ public class MessagesStoredTotal implements SYSTopicEntry {
 
     @Override
     public String description() {
-        return "The number of messages currently held in the message store. This includes retained messages and messages queued for durable clients.";
+        return "The version of the broker. Static.";
     }
 
     private class SysTopicSupplier implements Supplier<byte[]> {
 
         @Override
         public byte[] get() {
-            final Gauge<Long> metric = metricService.getHiveMQMetric(HiveMQMetrics.RETAINED_MESSAGES_CURRENT);
-            //FIXME: add queued messages
-            return Long.toString(metric.getValue()).getBytes();
+            return systemInformation.getHiveMQVersion().getBytes();
         }
     }
 }
