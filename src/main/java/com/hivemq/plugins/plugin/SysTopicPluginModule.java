@@ -24,7 +24,7 @@ import com.hivemq.spi.plugin.meta.Information;
 /**
  * @author Lukas Brandl
  */
-@Information(name = "HiveMQ Sys Topic Plugin", author = "Lukas Brandl", version = "1.0-SNAPSHOT")
+@Information(name = "HiveMQ Sys Topic Plugin", author = "dc-square GmbH", version = "3.0.0")
 public class SysTopicPluginModule extends HiveMQPluginModule {
 
     @Override

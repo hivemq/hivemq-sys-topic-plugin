@@ -60,8 +60,8 @@ public class BytesReceivedTotal implements SYSTopicEntry {
 
         @Override
         public byte[] get() {
-            final Gauge<Long> gauge = metricService.getHiveMQMetric(HiveMQMetrics.BYTES_READ_TOTAL);
-            return Long.toString(gauge.getValue()).getBytes();
+            final Gauge<Number> gauge = metricService.getHiveMQMetric(HiveMQMetrics.BYTES_READ_TOTAL);
+            return Long.toString(gauge.getValue().longValue()).getBytes();
         }
     }
 }

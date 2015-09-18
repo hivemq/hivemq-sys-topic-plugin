@@ -58,8 +58,8 @@ public class ClientsTotal implements SYSTopicEntry {
 
         @Override
         public byte[] get() {
-            final Gauge<Integer> clientSessionsGauge = metricService.getHiveMQMetric(HiveMQMetrics.CLIENT_SESSIONS_CURRENT);
-            return Long.toString(clientSessionsGauge.getValue()).getBytes();
+            final Gauge<Number> clientSessionsGauge = metricService.getHiveMQMetric(HiveMQMetrics.CLIENT_SESSIONS_CURRENT);
+            return Long.toString(clientSessionsGauge.getValue().longValue()).getBytes();
         }
     }
 }

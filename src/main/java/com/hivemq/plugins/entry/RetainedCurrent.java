@@ -59,8 +59,8 @@ public class RetainedCurrent implements SYSTopicEntry {
 
         @Override
         public byte[] get() {
-            final Gauge<Long> metric = metricService.getHiveMQMetric(HiveMQMetrics.RETAINED_MESSAGES_CURRENT);
-            return Long.toString(metric.getValue()).getBytes();
+            final Gauge<Number> metric = metricService.getHiveMQMetric(HiveMQMetrics.RETAINED_MESSAGES_CURRENT);
+            return Long.toString(metric.getValue().longValue()).getBytes();
         }
     }
 }

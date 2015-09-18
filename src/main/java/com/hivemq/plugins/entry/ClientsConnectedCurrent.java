@@ -58,8 +58,8 @@ public class ClientsConnectedCurrent implements SYSTopicEntry {
 
         @Override
         public byte[] get() {
-            final Gauge<Integer> gauge = metricService.getHiveMQMetric(HiveMQMetrics.CONNECTIONS_OVERALL_CURRENT);
-            return Integer.toString(gauge.getValue()).getBytes();
+            final Gauge<Number> gauge = metricService.getHiveMQMetric(HiveMQMetrics.CONNECTIONS_OVERALL_CURRENT);
+            return Integer.toString(gauge.getValue().intValue()).getBytes();
         }
     }
 }

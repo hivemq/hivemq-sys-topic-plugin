@@ -58,10 +58,10 @@ public class ClientsDisconnectedTotal implements SYSTopicEntry {
 
         @Override
         public byte[] get() {
-            final Gauge<Integer> clientSessionsGauge = metricService.getHiveMQMetric(HiveMQMetrics.CLIENT_SESSIONS_CURRENT);
-            final long clientSessionsCurrent = clientSessionsGauge.getValue();
-            final Gauge<Integer> clientsConnectedGauge = metricService.getHiveMQMetric(HiveMQMetrics.CONNECTIONS_OVERALL_CURRENT);
-            final long connectedClients = clientsConnectedGauge.getValue();
+            final Gauge<Number> clientSessionsGauge = metricService.getHiveMQMetric(HiveMQMetrics.CLIENT_SESSIONS_CURRENT);
+            final long clientSessionsCurrent = clientSessionsGauge.getValue().longValue();
+            final Gauge<Number> clientsConnectedGauge = metricService.getHiveMQMetric(HiveMQMetrics.CONNECTIONS_OVERALL_CURRENT);
+            final long connectedClients = clientsConnectedGauge.getValue().longValue();
 
             final long disconnectedClients = clientSessionsCurrent - connectedClients;
             return Long.toString(disconnectedClients).getBytes();
