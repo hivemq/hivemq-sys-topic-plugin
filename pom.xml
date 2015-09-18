@@ -100,7 +100,7 @@
                                     <goal>hivemq</goal>
                                 </goals>
                                 <configuration>
-                                    <hiveMQDir>/Applications/hivemq-3.0.0-SNAPSHOT</hiveMQDir>
+                                    <hiveMQDir>FIXME, insert your HiveMQ directory here!</hiveMQDir>
                                     <debugMode>SERVER</debugMode>
                                 </configuration>
                             </execution>
