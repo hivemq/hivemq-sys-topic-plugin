@@ -30,8 +30,6 @@ import com.hivemq.spi.topic.sys.Type;
 public class ClientsConnectedMaximum implements SYSTopicEntry {
     private final MetricService metricService;
 
-    private final String topic = "$SYS/broker/clients/maximum";
-
     @Inject
     public ClientsConnectedMaximum(final MetricService metricService) {
         this.metricService = metricService;
@@ -39,7 +37,7 @@ public class ClientsConnectedMaximum implements SYSTopicEntry {
 
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/clients/maximum";
     }
 
     @Override

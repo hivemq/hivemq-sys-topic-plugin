@@ -30,8 +30,6 @@ public class RetainedCurrent implements SYSTopicEntry {
 
     private final MetricService metricService;
 
-    private final String topic = "$SYS/broker/messages/retained/count";
-
     @Inject
     public RetainedCurrent(final MetricService metricService) {
         this.metricService = metricService;
@@ -39,7 +37,7 @@ public class RetainedCurrent implements SYSTopicEntry {
 
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/messages/retained/count";
     }
 
     @Override

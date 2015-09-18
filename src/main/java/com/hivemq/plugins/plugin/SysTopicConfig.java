@@ -16,6 +16,7 @@
 
 package com.hivemq.plugins.plugin;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.hivemq.spi.config.SystemInformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,19 +37,21 @@ public class SysTopicConfig {
     private static final Logger log = LoggerFactory.getLogger(SysTopicConfig.class);
     private static final String PUBLISH_INTERVAL_PROPERTY = "publishInterval";
 
-    private final int defaultPublishInterval = 60;
-
     private final SystemInformation systemInformation;
 
-    private int publishInterval;
+    @VisibleForTesting
+    final long defaultPublishInterval = 60;
+
+    private long publishInterval;
 
     @Inject
     SysTopicConfig(SystemInformation systemInformation) {
         this.systemInformation = systemInformation;
     }
 
+    @VisibleForTesting
     @PostConstruct
-    private void readProperties() {
+    void readProperties() {
 
         publishInterval = defaultPublishInterval; // Use default, in case no valid publish interval provided.
 
@@ -85,7 +88,7 @@ public class SysTopicConfig {
         return true;
     }
 
-    public int getPublishInterval() {
+    public long getPublishInterval() {
         return publishInterval;
     }
 }

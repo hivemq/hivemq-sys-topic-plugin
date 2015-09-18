@@ -26,8 +26,6 @@ import javax.annotation.PostConstruct;
  */
 public class UpTimeTotal implements SYSTopicEntry {
 
-    private final String topic = "$SYS/broker/uptime";
-
     private Long startTime;
 
     @PostConstruct
@@ -37,7 +35,7 @@ public class UpTimeTotal implements SYSTopicEntry {
 
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/uptime";
     }
 
     @Override

@@ -29,8 +29,6 @@ import com.hivemq.spi.topic.sys.Type;
 public class ClientsTotal implements SYSTopicEntry {
     private final MetricService metricService;
 
-    private final String topic = "$SYS/broker/clients/total";
-
     @Inject
     public ClientsTotal(final MetricService metricService) {
         this.metricService = metricService;
@@ -38,7 +36,7 @@ public class ClientsTotal implements SYSTopicEntry {
 
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/clients/total";
     }
 
     @Override

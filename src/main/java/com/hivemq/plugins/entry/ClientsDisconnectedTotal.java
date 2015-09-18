@@ -29,8 +29,6 @@ import com.hivemq.spi.topic.sys.Type;
 public class ClientsDisconnectedTotal implements SYSTopicEntry {
     private final MetricService metricService;
 
-    private final String topic = "$SYS/broker/clients/disconnected";
-
     @Inject
     public ClientsDisconnectedTotal(final MetricService metricService) {
         this.metricService = metricService;
@@ -38,7 +36,7 @@ public class ClientsDisconnectedTotal implements SYSTopicEntry {
 
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/clients/disconnected";
     }
 
     @Override

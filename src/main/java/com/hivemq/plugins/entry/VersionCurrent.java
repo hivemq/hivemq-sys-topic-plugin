@@ -28,8 +28,6 @@ public class VersionCurrent implements SYSTopicEntry {
 
     private final SystemInformation systemInformation;
 
-    private final String topic = "$SYS/broker/version";
-
     @Inject
     public VersionCurrent(final SystemInformation systemInformation) {
         this.systemInformation = systemInformation;
@@ -38,7 +36,7 @@ public class VersionCurrent implements SYSTopicEntry {
 
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/version";
     }
 
     @Override

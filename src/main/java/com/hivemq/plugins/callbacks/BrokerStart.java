@@ -57,7 +57,7 @@ public class BrokerStart implements OnBrokerStart {
     public void onBrokerStart() throws BrokerUnableToStartException {
         sysTopicRegistration.registerSysTopics();
 
-        final int publishInterval = sysTopicConfig.getPublishInterval();
+        final long publishInterval = sysTopicConfig.getPublishInterval();
         pluginExecutorService.scheduleAtFixedRate(new TriggerDynamicSysTopic(), publishInterval, publishInterval, TimeUnit.SECONDS);
 
     }

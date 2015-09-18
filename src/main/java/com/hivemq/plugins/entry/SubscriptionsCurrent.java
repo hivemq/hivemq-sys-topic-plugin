@@ -30,8 +30,6 @@ public class SubscriptionsCurrent implements SYSTopicEntry {
 
     private final MetricService metricService;
 
-    private final String topic = "$SYS/broker/subscriptions/count";
-
     @Inject
     public SubscriptionsCurrent(final MetricService metricService) {
         this.metricService = metricService;
@@ -39,7 +37,7 @@ public class SubscriptionsCurrent implements SYSTopicEntry {
 
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/subscriptions/count";
     }
 
     @Override

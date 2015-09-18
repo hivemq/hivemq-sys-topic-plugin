@@ -30,8 +30,6 @@ public class MessagesReceivedTotal implements SYSTopicEntry {
 
     private final MetricService metricService;
 
-    private final String topic = "$SYS/broker/messages/received";
-
     @Inject
     public MessagesReceivedTotal(final MetricService metricService) {
         this.metricService = metricService;
@@ -39,7 +37,7 @@ public class MessagesReceivedTotal implements SYSTopicEntry {
 
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/messages/received";
     }
 
     @Override

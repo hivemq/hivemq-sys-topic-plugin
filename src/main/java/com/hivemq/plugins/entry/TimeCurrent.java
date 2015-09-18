@@ -24,11 +24,9 @@ import com.hivemq.spi.topic.sys.Type;
  */
 public class TimeCurrent implements SYSTopicEntry {
 
-    private final String topic = "$SYS/broker/time";
-
     @Override
     public String topic() {
-        return topic;
+        return "$SYS/broker/time";
     }
 
     @Override
