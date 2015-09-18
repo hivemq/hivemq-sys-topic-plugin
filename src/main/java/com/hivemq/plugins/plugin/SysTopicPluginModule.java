@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 dc-square GmbH
+ * Copyright 2015 dc-square GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,11 @@ import com.hivemq.spi.plugin.meta.Information;
 
 
 /**
- * @author Florian Limpoeck
+ * @author Lukas Brandl
  */
-@Information(name = "HiveMQ Sys Topic Plugin", author = "Florian Limpoeck", version = "1.0-SNAPSHOT")
+@Information(name = "HiveMQ Sys Topic Plugin", author = "dc-square GmbH", version = "3.0.0")
 public class SysTopicPluginModule extends HiveMQPluginModule {
 
-    /**
-     * This method is provided to execute some custom plugin configuration stuff. Is is the place
-     * to execute Google Guice bindings,etc if needed.
-     */
     @Override
     protected void configurePlugin() {
     }
