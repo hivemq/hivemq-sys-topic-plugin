@@ -1,0 +1,36 @@
+:hivemq-sys-topics: http://www.hivemq.com/docs/hivemq/latest/#hivemqdocs__sys_topic
+
+= File Authentication Plugin
+
+== Description
+
+The SYS-Topic plugin is a plugin for HiveMQ to make it possible subscribe to HiveMQ SYS-Topics.
+For a detailed list of sys-topics check the link on top.
+
+== How to use the plugin with sample configuration
+
+. Copy the jar file to your +<HIVEMQ_HOME>/plugins+ folder
+. Copy configuration files
+..  +sample-configuration/systopic-plugin.properites+ into your +<HIVEMQ_HOME>/plugins+ folder
+. Run HiveMQ
+. Done!
+
+NOTE: This sample installation sets metrics publish interval to 60 seconds.
+
+== Configuration Options
+
+The plugin can be configured with the +systopic-plugin.properites+ file, which needs to be placed in the plugin folder next to the jar file.
+
+[cols="1m,1,2" options="header"]
+.Configuration Options
+|===
+|Name
+|Default
+|Description
+
+
+|publishInterval
+|60
+|This property specifies the interval of metrics getting published
+
+|===
