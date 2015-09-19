@@ -36,8 +36,7 @@ public class PublishReceived implements OnPublishReceivedCallback {
 
         final String topic = publish.getTopic();
         if (topic.startsWith("$SYS")) {
-            log.debug("Client {} published a message, to a SYS Topic. Disconnecting client.", clientData.getInetAddress().orNull());
-            throw new OnPublishReceivedException(true);
+            throw new OnPublishReceivedException("Client "+clientData.getInetAddress().orNull()+" published a message, to a SYS Topic. Disconnecting client.", true);
         }
     }
 
