@@ -17,7 +17,6 @@
 <assembly xmlns="http://maven.apache.org/xsd/assembly-1.1.2.xsd"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/xsd/assembly-1.1.2.xsd ">
-    <id>distribution</id>
     <formats>
         <format>zip</format>
         <format>tar</format>
@@ -32,7 +31,7 @@
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
-            <source>README.adoc</source>
+            <source>target/README.html</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
