@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
-package com.hivemq.plugins.entry;
+package com.hivemq.plugins.entry.abstracts;
 
 import com.codahale.metrics.Meter;
 import com.google.common.base.Supplier;
+import com.hivemq.spi.services.BlockingMetricService;
 import com.hivemq.spi.topic.sys.SYSTopicEntry;
 import com.hivemq.spi.topic.sys.Type;
 
 /**
  * @author Lukas Brandl
  */
-public abstract class RateEntry implements SYSTopicEntry {
+public abstract class RateEntry extends AbstractMetricEntry implements SYSTopicEntry {
 
     protected abstract Meter meter();
 
     private final RateEntry rateEntry;
 
-    protected RateEntry() {
+    protected RateEntry(final BlockingMetricService metricService) {
+        super(metricService);
         rateEntry = this;
     }
 

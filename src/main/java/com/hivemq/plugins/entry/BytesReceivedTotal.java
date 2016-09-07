@@ -19,7 +19,9 @@ package com.hivemq.plugins.entry;
 import com.codahale.metrics.Gauge;
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
+import com.hivemq.plugins.entry.abstracts.AbstractMetricEntry;
 import com.hivemq.spi.metrics.HiveMQMetrics;
+import com.hivemq.spi.services.BlockingMetricService;
 import com.hivemq.spi.services.MetricService;
 import com.hivemq.spi.topic.sys.SYSTopicEntry;
 import com.hivemq.spi.topic.sys.Type;
@@ -27,13 +29,11 @@ import com.hivemq.spi.topic.sys.Type;
 /**
  * @author Lukas Brandl
  */
-public class BytesReceivedTotal implements SYSTopicEntry {
-
-    private final MetricService metricService;
+public class BytesReceivedTotal extends AbstractMetricEntry implements SYSTopicEntry {
 
     @Inject
-    public BytesReceivedTotal(final MetricService metricService) {
-        this.metricService = metricService;
+    public BytesReceivedTotal(final BlockingMetricService metricService) {
+        super(metricService);
     }
 
     @Override
