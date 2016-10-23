@@ -18,7 +18,9 @@ package com.hivemq.plugins.entry;
 
 import com.codahale.metrics.Meter;
 import com.google.inject.Inject;
+import com.hivemq.plugins.entry.abstracts.RateEntry;
 import com.hivemq.spi.metrics.HiveMQMetrics;
+import com.hivemq.spi.services.BlockingMetricService;
 import com.hivemq.spi.services.MetricService;
 import com.hivemq.spi.topic.sys.Type;
 
@@ -26,11 +28,10 @@ import com.hivemq.spi.topic.sys.Type;
  * @author Lukas Brandl
  */
 public class PublishSentRate extends RateEntry {
-    private final MetricService metricService;
 
     @Inject
-    public PublishSentRate(final MetricService metricService) {
-        this.metricService = metricService;
+    protected PublishSentRate(BlockingMetricService metricService) {
+        super(metricService);
     }
 
     @Override

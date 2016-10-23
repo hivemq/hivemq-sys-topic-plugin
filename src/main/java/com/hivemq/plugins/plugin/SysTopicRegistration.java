@@ -17,6 +17,7 @@ package com.hivemq.plugins.plugin;
 
 import com.google.inject.Inject;
 import com.hivemq.plugins.entry.*;
+import com.hivemq.plugins.entry.abstracts.RateEntry;
 import com.hivemq.spi.services.SYSTopicService;
 import com.hivemq.spi.topic.sys.SYSTopicEntry;
 import org.slf4j.Logger;

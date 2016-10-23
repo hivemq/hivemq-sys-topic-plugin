@@ -18,7 +18,9 @@ package com.hivemq.plugins.entry;
 import com.codahale.metrics.Counter;
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
+import com.hivemq.plugins.entry.abstracts.AbstractMetricEntry;
 import com.hivemq.spi.metrics.HiveMQMetrics;
+import com.hivemq.spi.services.BlockingMetricService;
 import com.hivemq.spi.services.MetricService;
 import com.hivemq.spi.topic.sys.SYSTopicEntry;
 import com.hivemq.spi.topic.sys.Type;
@@ -26,13 +28,11 @@ import com.hivemq.spi.topic.sys.Type;
 /**
  * @author Lukas Brandl
  */
-public class MessagesDroppedTotal implements SYSTopicEntry {
-
-    private final MetricService metricService;
+public class MessagesDroppedTotal extends AbstractMetricEntry implements SYSTopicEntry {
 
     @Inject
-    public MessagesDroppedTotal(final MetricService metricService) {
-        this.metricService = metricService;
+    public MessagesDroppedTotal(final BlockingMetricService metricService) {
+        super(metricService);
     }
 
     @Override

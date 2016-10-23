@@ -19,7 +19,9 @@ import com.codahale.metrics.Histogram;
 import com.codahale.metrics.Snapshot;
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
+import com.hivemq.plugins.entry.abstracts.AbstractMetricEntry;
 import com.hivemq.spi.metrics.HiveMQMetrics;
+import com.hivemq.spi.services.BlockingMetricService;
 import com.hivemq.spi.services.MetricService;
 import com.hivemq.spi.topic.sys.SYSTopicEntry;
 import com.hivemq.spi.topic.sys.Type;
@@ -27,12 +29,11 @@ import com.hivemq.spi.topic.sys.Type;
 /**
  * @author Lukas Brandl
  */
-public class ClientsConnectedMaximum implements SYSTopicEntry {
-    private final MetricService metricService;
+public class ClientsConnectedMaximum extends AbstractMetricEntry implements SYSTopicEntry {
 
     @Inject
-    public ClientsConnectedMaximum(final MetricService metricService) {
-        this.metricService = metricService;
+    public ClientsConnectedMaximum(final BlockingMetricService metricService) {
+        super(metricService);
     }
 
     @Override
