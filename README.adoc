@@ -1,4 +1,5 @@
-:hivemq-sys-topics: http://www.hivemq.com/docs/hivemq/latest/#hivemqdocs__sys_topic
+:hivemq-sys-topics: https://www.hivemq.com/docs/3.4/hivemq/monitoring.html#sys-topic
+
 
 = HiveMQ SYS Topic Plugin
 
